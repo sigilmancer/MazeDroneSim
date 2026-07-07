@@ -1,0 +1,32 @@
+# === Build Outputs ===
+bin/
+obj/
+
+# === User-Specific Settings ===
+*.user
+*.userosscache
+*.sln.docstates
+
+# === Visual Studio / Rider Cache & Tools ===
+.vs/
+.idea/
+.suo
+*.suo
+*.ntvs*
+*.njsproj
+*.sln.targets
+
+# === Operating System Garbage ===
+.DS_Store
+Thumbs.db
+
+# === Local Configurations / Secrets ===
+*.env
+*.env.local
+appsettings.Development.json
+
+# Ignore third-party frontend packages downloaded locally
+wwwroot/lib/
+
+# Ignore bundled/compiled output assets if you use a compiler (like Webpack/Vite)
+wwwroot/dist/
