@@ -11,7 +11,8 @@ A critical architectural restraint is that **the drone has no tracking connectio
 To decouple the simulation engine from the drone's logic, this architecture tracks two distinct positional states:
 
 1.  **Actual Physical Position:** Used exclusively by the sandbox layout engine to track the true matrix coordinate inside the generated environment block.
-2.  **Current Relative Position:** The drone's self-contained relative coordinate layout memory. It instantiates at `(0, 0, 0)`. Every physical movement translates a relative shifting offset inside a localized tuple `HashSet` tracker.
+2.  **Current Relative Position:** The drone's self-contained relative coordinate layout memory. It instantiates at `(0, 0, 0)`. Every physical movement translates a relative shifting offset inside a localised tuple `HashSet` tracker.
+3.  **Blazor WebAssembly UI:** The engine is coupled to a non-blocking interactive web interface using multi-layered CSS grids to visually render the three separate 3D matrix floors (Z = 0, 1, 2) simultaneously.
 
                   ┌──────────────────────────────┐
                   │   3D Matrix Environment      │
@@ -35,4 +36,12 @@ The navigation layout relies on an asynchronous **Depth-First Search (DFS)** gra
 
 ## Engineering Reflection & Language Nuances
 This entry serves as a comparative study on object mapping structure styles:
-*   The **C# Engine** utilizes strongly typed modern `with` records and discrete coordinate schemas optimized for predictable enterprise runtimes.
+*   The **C# Engine** utilises strongly-typed modern `record` structs with value-equality features optimised for predictable enterprise runtimes:
+```csharp
+public record Coordinate(int X, int Y, int Z);
+```
+
+## 🎮 Live Simulation Controls
+* **🔄 Generate New Maze Layout**: Procedurally builds a perfect 3x3x3 grid ensuring no isolated sectors exist.
+* **⚡ Launch Autonomous Drone Pathfinding**: Triggers the async DFS solver with a localised 300ms execution pacing window so human eyes can watch the drone (`🛸`) search and backtrack.
+
